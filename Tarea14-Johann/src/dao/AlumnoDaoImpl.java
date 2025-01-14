@@ -31,7 +31,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 	public int add(Alumno al) throws Exception {
 		String sql = """
 				INSERT INTO grupo(nombre, apellidos, fecha_nacimiento)
-				VALUES (?,?,?);
+				VALUES (?,?,?)
 				""";
 
 		int result;
@@ -60,6 +60,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			pstm.setInt(1, id);
 
 			try (ResultSet rs = pstm.executeQuery()) {
+				// Al devolver una sola fila se puede hacer con if
 				if (rs.next()) {
 					result = new Alumno();
 					result.setId_alumno(rs.getInt("id_alumno"));
@@ -86,7 +87,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				ResultSet rs = pstm.executeQuery()) {
 
 			Alumno al;
-			// Al devolver una sola fila se puede hacer con if
+
 			while (rs.next()) {
 				al = new Alumno();
 				al.setId_alumno(rs.getInt("id_alumno"));
